@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система обліку робочого часу</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 28px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .input-box {
+            background-color: blue;
+            color: yellow;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%; /* Ширина лівого блоку */
+        }
+        .result-box {
+            background-color: blue;
+            color: yellow;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%; /* Ширина правого блоку */
+            margin-top: 20px; /* Відступ від верхнього блоку */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Лівий блок з формою введення даних -->
+        <div class="input-box">
+            <h2>Введіть свої дані:</h2>
+            <form id="userDataForm" action="/submit" method="post">
+                <label for="userID">UserID:</label>
+                <input type="text" id="userID" name="userID" required><br><br>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Надіслати відвідуваність</button>
+            </form>
+        </div>
+
+        <!-- Правий блок з результатами -->
+        <div class="result-box" id="result">
+            <!-- Дані будуть додані динамічно через JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('userDataForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Зупиняємо стандартну поведінку форми
+
+            // Отримуємо значення полів форми
+            const userID = document.getElementById('userID').value;
+            const currentTime = new Date().toLocaleString();
+
+            // Знаходимо елемент з ідентифікатором 'result'
+            const resultElement = document.getElementById('result');
+            // Створюємо рядок з даними
+            const resultText = `
+                <p>Привіт - ${userID}</p>
+                <p>Ваш час реєстрації - ${currentTime}</p>
+                <p>Дякую, ви успішно надіслали відвідуваність, приємного дня!</p>
+            `;
+            // Додаємо рядок з даними до елементу 'result'
+            resultElement.innerHTML = resultText;
+        });
+    </script>
+</body>
+</html>
